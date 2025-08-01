@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel SS International</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Tag Bar -->
+
+  <div class="tag-bar">
+    <span id="datetime"></span> | 📞 +91 98765 43210 | ✉️ info@ssinternational.com
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <img src="logo.png" alt="Hotel Logo">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#room">Rooms</a></li>
+      <li><a href="#booking">Booking</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Welcome to Hotel SS International</h1>
+      <p>Experience Luxury & Comfort with World-Class Hospitality</p>
+      <button onclick="location.href='#booking'">Book Now</button>
+    </div>
+  </section>
+
+  <!-- Rooms -->
+  <section id="room">
+    <h2>Our Rooms</h2>
+    <div class="rooms">
+      <div class="room-card">
+        <img src="images/bedroom.jpg" alt="Deluxe Room">
+        <h3>Deluxe Room</h3>
+        <p>₹4,999 / Night</p>
+        <button  onclick="location.href='#booking'">Book Now</button>
+      </div>
+      <div class="room-card">
+        <img src="images/sofa.jpg" alt="Suite">
+        <h3>Luxury Suite</h3>
+        <p>₹7,999 / Night</p>
+        <button  onclick="location.href='#booking'">Book Now</button>
+      </div>
+      <div class="room-card">
+        <img src="images/suite.jpg" alt="Standard Room">
+        <h3>Standard Room</h3>
+        <p>₹2,999 / Night</p>
+        <button onclick="location.href='#booking'">Book Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>At Hotel SS International, we combine elegance and comfort to provide a truly luxurious experience. 
+       Our dedicated staff ensures that every guest feels at home, while enjoying premium facilities and services.</p>
+  </section>
+
+
+  <!-- Booking -->
+<section id="booking" class="booking">
+  <h2>Book Your Stay</h2>
+  <form id="bookingForm" class="booking-form ">
+
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+     
+<label for="room">Room Type</label>
+<select id="room" name="room" required>
+  <option value="">-- Select a Room --</option>
+  <option value="Deluxe Room">Deluxe Room - ₹4,999 / Night</option>
+  <option value="Luxury Suite">Luxury Suite - ₹7,999 / Night</option>
+  <option value="Standard Room">Standard Room - ₹2,999 / Night</option>
+</select>
+
+    <label for="date">Check-in Date</label>
+    <input type="date" id="date" name="date" required>
+    <button type="submit">Confirm Booking</button>
+  </form>
+</section>
+
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <p>📞 +91 98265 23222</p>
+    <p>✉️ info@ssinternational.com</p>
+    <p>📍 123 Lal Ganga, Raipur, India</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Hotel SS International | All Rights Reserved</p>
+  </footer>
+
+  <!-- JS for Date & Time -->
+  <script>
+    function updateDateTime() {
+      const now = new Date();
+      document.getElementById("datetime").innerHTML = 
+        now.toLocaleDateString() + " " + now.toLocaleTimeString();
+    }
+    setInterval(updateDateTime, 1000);
+  </script>
+  
+  <!-- googlesheet database -->
+<script>
+document.getElementById("bookingForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const data = {};
+  formData.forEach((value, key) => data[key] = value);
+
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbxl5AVk8_v7GZ00TqTNt7vFn-pX9EPJ7EOxD4pEo0nDrF45d8H6ewo0C-e9OWadRUZk/exec", {
+      method: "POST",
+        mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+
+    const text = await response.text();
+    alert("Booking saved successfully! A Staff Will Contact You Shortly" + text);
+    this.reset();
+
+  } catch (error) {
+    alert("Booking failed: " + error);
+    console.error("Error details:", error);
+  }
+});
+</script>
+
+
+</body>
+</html>
