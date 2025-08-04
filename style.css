@@ -55,6 +55,16 @@ body {
   color: white;
 }
 
+/* Hamburger button */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: gold;
+  cursor: pointer;
+}
+
 /* Hero Section */
 .hero {
   background: url('images/background.jpg') no-repeat center center/cover;
@@ -214,15 +224,36 @@ footer {
 
 /* 🌐 Mobile Responsive */
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
   .navbar {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;   /* logo + hamburger in same row */
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;     /* prevent wrapping */
   }
+
+  .navbar img {
+    height: 50px; /* smaller logo for mobile */
+  }
+
   .navbar ul {
+    display: none;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     width: 100%;
+    background: #000;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px; /* menu appears below navbar */
   }
+
+  .navbar ul.active {
+    display: flex;
+  }
+
   .hero {
     height: auto;
     padding: 40px 20px;
