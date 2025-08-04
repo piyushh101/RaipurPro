@@ -18,15 +18,18 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <img src="logo.png" alt="Hotel Logo">
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#room">Rooms</a></li>
-      <li><a href="#booking">Booking</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#about">About Us</a></li>
-    </ul>
-  </nav>
+  <div class="logo">
+    <img src="logo.png" alt="Hotel SS International">
+  </div>
+  <button class="menu-toggle" id="menuToggle">&#9776;</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#rooms">Rooms</a></li>
+    <li><a href="#booking">Booking</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About Us</a></li>
+  </ul>
+</nav>
 
   <!-- Hero -->
   <section class="hero" id="home">
@@ -152,7 +155,16 @@ document.getElementById("bookingForm").addEventListener("submit", async function
   }
 });
 </script>
+<script>
+ document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
 
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  });
+</script>
 
 </body>
 </html>
